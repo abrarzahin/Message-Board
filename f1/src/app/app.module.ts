@@ -13,6 +13,7 @@ import { NavComponent} from './nav.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {HomeComponent} from './home.component';
 import {RegisterComponent} from './register.component';
+import { AuthService } from './auth.service';
 
 
 
@@ -39,6 +40,6 @@ var routes =[{
   imports: [BrowserModule, HttpModule,RouterModule.forRoot(routes), FormsModule,ReactiveFormsModule, BrowserAnimationsModule,MatToolbarModule, MatButtonModule, MatCardModule, MatInputModule, MatSnackBarModule],
   declarations: [AppComponent,NavComponent, MessagesComponent, NewMessageComponent,HomeComponent,RegisterComponent],
   bootstrap: [AppComponent],
-  providers: [WebService]
+  providers: [WebService,AuthService]
 })
 export class AppModule { }
