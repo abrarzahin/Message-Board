@@ -14,6 +14,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {HomeComponent} from './home.component';
 import {RegisterComponent} from './register.component';
 import { AuthService } from './auth.service';
+import { LoginComponent } from './login.component';
 
 
 
@@ -33,12 +34,16 @@ var routes =[{
 {
   path:'register',
   component: RegisterComponent
+},
+{
+  path:'login',
+  component: LoginComponent
 }
 ];
 
 @NgModule({
   imports: [BrowserModule, HttpModule,RouterModule.forRoot(routes), FormsModule,ReactiveFormsModule, BrowserAnimationsModule,MatToolbarModule, MatButtonModule, MatCardModule, MatInputModule, MatSnackBarModule],
-  declarations: [AppComponent,NavComponent, MessagesComponent, NewMessageComponent,HomeComponent,RegisterComponent],
+  declarations: [AppComponent,NavComponent, MessagesComponent, NewMessageComponent,HomeComponent,RegisterComponent,LoginComponent],
   bootstrap: [AppComponent],
   providers: [WebService,AuthService]
 })
