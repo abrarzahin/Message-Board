@@ -33,6 +33,26 @@ api.post('/messages', (req, res) => {
     res.json(req.body);
 })
 
+api.get('/users/me', checkAuthenticated, (req,res) => {
+    res.json(users[req.user]);
+})
+
+api.post('/users/me', checkAuthenticated, (req,res) => {
+    var user= users[req.user];
+    user.firstName=req.body.firstName;
+    user.lastName=req.body.lastName;
+    res.json(user);
+})
+
+api.post('/users/me', checkAuthenticated, (req,res) => {
+    var user = users[req.user];
+
+    user.firstName = req.body.firstName;
+    user.lastName = req.body.lastName;
+
+    res.json(user);
+})
+
 auth.post('/login', (req, res) => {
     var user = users.find(user => user.email == req.body.email);
 
@@ -63,6 +83,21 @@ function sendAuthError(res) {
     return res.json({ success: false, message: 'email or password incorrect' });
 }
 
+function checkAuthenticated(req, res, next) {
+    if(!req.header('authorization'))
+        return res.status(401).send({message: 'Unauthorized requested. Missing authentication header'});
+
+    var token = req.header('authorization').split(' ')[1];
+
+    var payload = jwt.decode(token, '123');
+
+    if(!payload)
+        return res.status(401).send({message: 'Unauthorized requested. Authentication header invalid'});
+
+    req.user = payload;
+
+    next();
+}
 
 app.use('/api', api);
 app.use('/auth', auth);

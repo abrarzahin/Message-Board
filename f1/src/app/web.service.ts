@@ -1,6 +1,9 @@
 import { Http } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
+import {AuthService} from './auth.service';
+import { map } from 'rxjs/operators';
+
 
 @Injectable()
 export class WebService {
@@ -8,7 +11,7 @@ export class WebService {
 
     messages = [];
 
-    constructor(private http: Http, private sb: MatSnackBar) {
+    constructor(private http: Http, private sb: MatSnackBar,private auth:AuthService) {
         this.getMessages(null);
     }
 
@@ -30,7 +33,12 @@ export class WebService {
         }
 
     }
-
+    getUser (){
+             return this.http.get(this.BASE_URL+'/users/me',this.auth.tokenHeader).pipe(map(res => res.json()));
+    }
+    saveUser (userData){
+        return this.http.post(this.BASE_URL+'/users/me',userData,this.auth.tokenHeader).pipe(map(res => res.json()));
+}
     private handleError(error) {
         console.error(error);
         this.sb.open(error, 'close', { duration: 2000 });

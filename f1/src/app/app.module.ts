@@ -15,6 +15,7 @@ import {HomeComponent} from './home.component';
 import {RegisterComponent} from './register.component';
 import { AuthService } from './auth.service';
 import { LoginComponent } from './login.component';
+import { UserComponent } from './user.component';
 
 
 
@@ -39,11 +40,16 @@ var routes =[{
   path:'login',
   component: LoginComponent
 }
+,
+{
+  path:'user',
+  component: UserComponent
+}
 ];
 
 @NgModule({
   imports: [BrowserModule, HttpModule,RouterModule.forRoot(routes), FormsModule,ReactiveFormsModule, BrowserAnimationsModule,MatToolbarModule, MatButtonModule, MatCardModule, MatInputModule, MatSnackBarModule],
-  declarations: [AppComponent,NavComponent, MessagesComponent, NewMessageComponent,HomeComponent,RegisterComponent,LoginComponent],
+  declarations: [AppComponent,NavComponent, MessagesComponent, NewMessageComponent,HomeComponent,RegisterComponent,LoginComponent,UserComponent],
   bootstrap: [AppComponent],
   providers: [WebService,AuthService]
 })
